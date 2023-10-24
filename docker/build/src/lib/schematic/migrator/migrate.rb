@@ -39,15 +39,6 @@ module Schematic
 
     protected
 
-    def db_connection
-      @options[:db_connection] ||= 
-        Sequel.connect(
-          options[:db_url], 
-          user: options[:db_user], 
-          password: options[:db_password]
-        )
-    end
-
     def up(steps)
       run_migrator(target: migration_to_apply(steps - 1)[:version])
     end

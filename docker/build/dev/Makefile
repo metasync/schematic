@@ -1,4 +1,4 @@
-include ../../config/project.env
+include ../../make.env/project.env
 include build.env
 include ../shared/build.env
 

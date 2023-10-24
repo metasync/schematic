@@ -72,7 +72,7 @@ rake deploy                           # Run deployment
 After a new project is created, it is most likely to create your database migration before any other development work:
 
 ```
-rake db:create_migration[create_samples]
+r
 
 New migration is created: /home/app/db/migrations/schematic/20231019015901_create_samples.rb
 ```
@@ -85,17 +85,19 @@ rake db:migrate
 
 ### Configuration management
 
-All project configurations can be maanged under folder `/docker/config`
+Global project configurations can be managed under folder `/docker/make.env`
 
   * project.env - project wide configurations
   * docker.env - docker container configurations
     * To setup image registry configuration
     * To use newer version of Schematic
-    * To use different database adapter (default: MSSQL)
+    * To use different database type (default: MSSQL)
   * cipher.env - cipher configurations
-  * secret.env - credential configurations
-    * This file will be ignored by Git by default
-    * No any credentials should be checked into source repo
+  * database folder like `mssql` - database configurations
+    * docker.env - database container configurations
+    * secret.env - database credential configurations
+      * This file will be ignored by Git by default
+      * No any credentials should be checked into source repo
 
 ### Credential management
 
@@ -112,14 +114,14 @@ Saving public key (/home/app/.cipher/schematic.pub) ...done
 
 Then, you can encrypt your credentials via environment variables. 
 
-Assume you have setup an environment variable, DEV_DB_PASSWORD, in your secret file `docker/config/secret.env`. 
+Assume you have setup an environment variable, DB_PASSWORD, in your secret file `docker/deploy/env/secret.env`. 
 
 ```
 rake cipher:encrypt_env_var[DB_PASSWORD]
 Rv1ZR50pW7XAG6/6LNhNM7uAdtz4J0v6jgFcA1bGN/DNOcr......+013DhDuMwRDmUKjyrp9SM6kAnAAxMbKEpSrrCsMIA=
 ```
 
-Please save the encrypted string (Base64 encoded) to your `docker/config/secret.env`:
+Please save the encrypted string (Base64 encoded) to your `docker/deploy/env/secret.env`:
 
 ```
 DEV_DB_PASSWORD_ENCRYPTED=Rv1ZR50pW7XAG6/6LNhNM7uAdtz4J0v6jgFcA1bGN/DNOcr......+013DhDuMwRDmUKjyrp9SM6kAnAAxMbKEpSrrCsMIA=
@@ -153,13 +155,15 @@ make push.app.rel
 
 Here is the project folder structure for a sample project:
 
-test-sample
+```
+test_sample
+├── CHANGELOG.md
+├── README.md
+├── VERSION
 ├── docker
 │   ├── Makefile
 │   ├── Makefile.env
 │   ├── build
-│   │   ├── Makefile
-│   │   ├── Makefile.env
 │   │   ├── dev
 │   │   │   ├── Dockerfile
 │   │   │   ├── Makefile
@@ -171,22 +175,33 @@ test-sample
 │   │   └── shared
 │   │       ├── build.env
 │   │       └── build.mk
-│   ├── cipher.env
-│   ├── config
-│   │   ├── cipher
-│   │   ├── cipher.env
-│   │   ├── docker.env
-│   │   ├── project.env
-│   │   └── secret.env
-│   ├── docker-compose.yaml
-│   └── mssql
-│       ├── database.env
-│       ├── docker-compose.yaml
-│       └── scripts
-│           ├── mssql.sh
-│           ├── setup-db.sh
-│           └── sql
-│               └── setup-db.sql
+│   ├── deploy
+│   │   ├── docker-compose.yaml
+│   │   ├── env
+│   │   │   ├── cipher.env
+│   │   │   ├── database.env
+│   │   │   ├── jobs
+│   │   │   │   └── general.env
+│   │   │   └── secret.env
+│   │   └── mssql
+│   │       ├── docker-compose.yaml
+│   │       └── scripts
+│   │           ├── mssql.sh
+│   │           ├── setup-db.sh
+│   │           └── sql
+│   │               └── setup-db.sql
+│   └── make.env
+│       ├── cipher.env
+│       ├── docker.env
+│       ├── mssql
+│       │   ├── docker.env
+│       │   └── secret.env
+│       └── project.env
 └── src
     ├── Rakefile
-    └── VERSION
+    ├── db
+    │   └── migrations
+    ├── jobs
+    │   └── general.yaml
+    └── stored_procedures
+```

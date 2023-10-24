@@ -1,11 +1,3 @@
-include config/project.env
-include config/docker.env
-include config/${DB_ADAPTER}/docker.env
-include config/${DB_ADAPTER}/secret.env
-include config/cipher.env
-
-export
-
 include Makefile.env
 
 build.app.dev:

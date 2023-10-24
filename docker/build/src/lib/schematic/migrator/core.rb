@@ -73,11 +73,20 @@ module Schematic
         ENV['DB_PASSWORD_ENCRYPTED'].empty? ?
           ENV['DB_PASSWORD'] : 
           decrypt_db_password(ENV['DB_PASSWORD_ENCRYPTED'])
-      @options[:db_url] = ENV['DATABASE_URL']
+      @options[:database_url] = ENV['DATABASE_URL']
     end
 
     def decrypt_db_password(encrypted_password)
       Schematic::Cipher.new.decrypt(encrypted_password)
+    end
+
+    def db_connection
+      @options[:db_connection] ||= 
+        Sequel.connect(
+          options[:database_url], 
+          user: options[:db_user], 
+          password: options[:db_password]
+        )
     end
   end
 end
