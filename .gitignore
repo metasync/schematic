@@ -13,4 +13,3 @@ log
 .cache
 .cipher
 .data
-secret.env

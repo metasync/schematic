@@ -7,7 +7,8 @@ create.project.mssql: check_project_nulity check_app_nulity check_target_existen
 		sed -i'' -e 's/SCHEMATIC__DB_TYPE/mssql/g' $${project_path}/docker/make.env/docker.env && \
 		rm -f $${project_path}/docker/make.env/docker.env-e && \
 		rm -fr $${project_path}/docker/make.env/psql && \
-		rm -fr $${project_path}/docker/deploy/psql
+		rm -fr $${project_path}/docker/deploy/psql && \
+		mv $${project_path}/gitignore $${project_path}/.gitignore
 
 create.project.psql: check_project_nulity check_app_nulity check_target_existence
 	@project_path=$(target)/$(project)_$(app) && \

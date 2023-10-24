@@ -114,18 +114,20 @@ Saving public key (/home/app/.cipher/schematic.pub) ...done
 
 Then, you can encrypt your credentials via environment variables. 
 
-Assume you have setup an environment variable, DB_PASSWORD, in your secret file `docker/deploy/env/secret.env`. 
+Assume you have setup an environment variable, DEV_DB_PASSWORD, in the secret file `docker/make.env/mssql/secret.env`. In the dev container, another environment variable, DB_PASSWORD, is used to hold the value of DEV_DB_PASSWORD. You can generated the encrypted database password by running:
 
 ```
 rake cipher:encrypt_env_var[DB_PASSWORD]
 Rv1ZR50pW7XAG6/6LNhNM7uAdtz4J0v6jgFcA1bGN/DNOcr......+013DhDuMwRDmUKjyrp9SM6kAnAAxMbKEpSrrCsMIA=
 ```
 
-Please save the encrypted string (Base64 encoded) to your `docker/deploy/env/secret.env`:
+Please save the encrypted string (Base64 encoded) to an environment variable, DEV_DB_PASSWORD_ENCRYPTED, in the secret file `docker/make.env/mssql/secret.env`:
 
 ```
 DEV_DB_PASSWORD_ENCRYPTED=Rv1ZR50pW7XAG6/6LNhNM7uAdtz4J0v6jgFcA1bGN/DNOcr......+013DhDuMwRDmUKjyrp9SM6kAnAAxMbKEpSrrCsMIA=
 ```
+
+Note: if PostgreSQL is used, the secret file is located under `docker/make.env/psql/secret.env`.
 
 Last, you need to restart your containers to make it effective:
 

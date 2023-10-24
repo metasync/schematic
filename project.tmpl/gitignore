@@ -13,4 +13,4 @@ log
 .cache
 .cipher
 .data
-secret.env
+*/make.env/*/secret.env
