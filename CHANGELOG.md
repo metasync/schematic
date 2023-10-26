@@ -1,6 +1,10 @@
-## [0.1.6] (2023-10-24)
+## [0.2.0] (2023-10-26)
 
 	* Fixed a gitignore rule to allow some secret env files to be checked into code repository
+	* Refactored make env files to consolidate configuration settings
+	* Added environment variables DB_TYPE to indicate database engine: mssql or psql so that database identifier mangling can be properly configured in Ruby Sequel
+	* Provided convenient Makefile targets to show related docker images
+	* Updated README.md for project creation with proper database passwords configured
 
 ## [0.1.5] (2023-10-24)
 
