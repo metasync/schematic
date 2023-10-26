@@ -64,6 +64,7 @@ module Schematic
     end
 
     def on_init
+      @options[:db_type] = ENV['DB_TYPE']
       @options[:db_adapter] = ENV['DB_ADAPTER']
       @options[:db_host] = ENV['DB_HOST']
       @options[:db_name] = ENV['DB_NAME']
@@ -86,7 +87,13 @@ module Schematic
           options[:database_url], 
           user: options[:db_user], 
           password: options[:db_password]
-        )
+        ).tap do |db|
+          if options[:db_type] == 'mssql'
+            db.extension :identifier_mangling
+            db.identifier_input_method = nil
+            db.identifier_output_method = nil
+          end
+        end
     end
   end
 end
