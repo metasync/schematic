@@ -9,6 +9,9 @@ push.app.dev:
 shell.app.dev:
 	@$(MAKE) -C build/dev shell
 
+image.app.dev:
+	@$(MAKE) -C build/dev image
+
 build.app.rel:
 	@$(MAKE) -C build/rel build
 
@@ -18,10 +21,15 @@ push.app.rel:
 shell.app.rel:
 	@$(MAKE) -C build/rel shell
 
+image.app.rel:
+	@$(MAKE) -C build/rel image
+
 prune:
 	@${CONTAINER_CLI} image prune -f
 clean: prune
 
+image.dev:
+	@${CONTAINER_CLI} images | grep ${DEV_BASE_IMAGE_REPO} | grep ${DEV_BASE_IMAGE_TAG}
 
 up:
 	@${CONTAINER_CLI} compose up -d

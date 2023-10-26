@@ -22,6 +22,9 @@ push:
 shell:
 	@${CONTAINER_CLI} run -it --rm ${IMAGE_REGISTRY_NAME} /bin/sh
 
+image:
+	@${CONTAINER_CLI} images | grep ${IMAGE_REPO} | grep ${IMAGE_TAG}
+
 prune:
 	@${CONTAINER_CLI} image prune -f
 clean: prune
