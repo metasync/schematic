@@ -14,7 +14,21 @@ cd schematic
 Then, make a new project:
 
 ```
-make create.project project=test app=sample target=/root/to/projects
+# MSSQL
+make create.project.mssql project=test app=sample target=/root/to/projects
+
+# PostgreSQL
+make create.project.psql project=test app=sample target=/root/to/projects
+```
+
+Then, set database password to environment variable, `MSSQL_SA_PASSWORD`, in `secret.env` file:
+
+```
+## MSSQL
+vi /docker/make.env/mssql/secret.env
+
+## PostgreSQL
+vi /docker/make.env/psql/secret.env
 ```
 
 Now project can be started:
@@ -193,10 +207,12 @@ test_sample
 │   │           └── sql
 │   │               └── setup-db.sql
 │   └── make.env
+│       ├── base_image.env
 │       ├── cipher.env
+│       ├── database.env
 │       ├── docker.env
 │       ├── mssql
-│       │   ├── docker.env
+│       │   ├── database.env
 │       │   └── secret.env
 │       └── project.env
 └── src
