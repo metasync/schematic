@@ -29,7 +29,8 @@ prune:
 clean: prune
 
 image.dev:
-	@${CONTAINER_CLI} images | grep ${DEV_IMAGE_REPO} | grep ${DEV_IMAGE_TAG}
+	@${CONTAINER_CLI} images | grep ${DEV_IMAGE_REPO} | grep ${DEV_IMAGE_TAG} || \
+		echo "Error! Dev image, ${DEV_IMAGE}, is NOT found. Probably need to build it:\n\n  make build.base.${DEV_IMAGE_RELEASE_TAG}"
 
 up:
 	@${CONTAINER_CLI} compose up -d

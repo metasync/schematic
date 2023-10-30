@@ -24,7 +24,8 @@ shell:
 	@${CONTAINER_CLI} run -it --rm ${IMAGE_REGISTRY_NAME} /bin/sh
 
 image:
-	@${CONTAINER_CLI} images | grep ${IMAGE_REPO} | grep ${IMAGE_TAG}
+	@${CONTAINER_CLI} images | grep ${IMAGE_REPO} | grep ${IMAGE_TAG} || \
+		echo "Error! Base image for ${RELEASE_TAG}, ${IMAGE_NAME}, is NOT found. Probably need to build it:\n\n  make build.base.${RELEASE_TAG}"
 
 prune:
 	@${CONTAINER_CLI} image prune -f
