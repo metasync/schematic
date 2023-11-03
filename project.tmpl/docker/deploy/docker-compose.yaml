@@ -5,7 +5,7 @@ services:
   dev:
     depends_on:
       - dev.db
-    image: ${DEV_BASE_IMAGE}
+    image: ${DEV_IMAGE}
     env_file:
       - env/cipher.env
       - env/database.env
