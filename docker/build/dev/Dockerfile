@@ -37,6 +37,8 @@ ARG ruby_version
 ARG alpine_version
 ARG created_at
 
+ENV SCHEMATIC_VERSION=${version}-${release_tag}.${build_number}
+
 LABEL org.opencontainers.image.title=${project}-${app} \
     org.opencontainers.image.version=${version}-${release_tag}.${build_number} \
     org.opencontainers.image.authors=${authors} \
