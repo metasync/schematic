@@ -37,6 +37,8 @@ ARG base_image_repo
 ARG base_image_tag
 ARG created_at
 
+ENV APP_VERSION=${version}-${release_tag}.${build_number}
+
 LABEL org.opencontainers.image.title=${project}-${app} \
     org.opencontainers.image.version=${version}-${release_tag}.${build_number} \
     org.opencontainers.image.authors=${authors} \
