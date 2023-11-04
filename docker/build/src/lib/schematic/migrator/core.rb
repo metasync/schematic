@@ -36,6 +36,8 @@ module Schematic
 
     def default_work_dir = Dir.pwd
 
+    def db_connection_test = !db_connection.nil?
+
     protected
 
     def set_default_options

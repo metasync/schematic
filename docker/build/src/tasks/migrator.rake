@@ -3,6 +3,16 @@
 require_relative '../lib/schematic/migrator'
 
 namespace :db do
+  desc "Test database connection"
+  task :test do |_, args|
+    migrator = Schematic::Migrator.new
+    if migrator.db_connection_test
+      puts "Succeeded to connect to database: #{migrator.options[:db_host]}/#{migrator.options[:db_name]}"
+    else
+      puts "Failed to connect to database: #{migrator.options[:db_host]}/#{migrator.options[:db_name]}"
+    end
+  end
+
   desc "Run migrations"
   task :migrate, [:version] do |_, args|
     version = args[:version].to_i if args[:version]
