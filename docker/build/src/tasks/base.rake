@@ -10,7 +10,7 @@ namespace :app do
   desc "Show application version"
   task :version do
     if ENV['APP_VERSION'].nil?
-      puts File.read('VERSION') if File.exist?('VERSION')
+      puts "App version: #{File.read('VERSION')}" if File.exist?('VERSION')
     else
       puts ENV['APP_VERSION']
     end
@@ -20,6 +20,12 @@ end
 namespace :schematic do
   desc "Show Schematic version"
   task :version do
-    puts ENV['SCHEMATIC_VERSION'] 
+    puts "Schematic version: #{ENV['SCHEMATIC_VERSION']}"
   end
+end
+
+desc "Show version info"
+task :version do
+  Rake::Task['app:version'].invoke
+  Rake::Task['schematic:version'].invoke
 end
