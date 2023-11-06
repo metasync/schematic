@@ -29,3 +29,11 @@ task :version do
   Rake::Task['app:version'].invoke
   Rake::Task['schematic:version'].invoke
 end
+
+task :check do
+  puts "Version check:"
+  Rake::Task['version'].invoke
+  puts
+  puts "Database connection check:"
+  Rake::Task['db:test'].invoke
+end
