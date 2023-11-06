@@ -1,4 +1,4 @@
-ARG base_image_repo=quay.io/metasync/schematic-base
+ARG base_image_repo=quay.io/metasync/schematic_base
 ARG base_image_tag
 FROM ${base_image_repo}:${base_image_tag}
 
