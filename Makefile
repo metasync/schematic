@@ -1,5 +1,5 @@
 create.project.mssql: check_project_nulity check_app_nulity check_target_existence
-	@project_path=$(target)/$(project)-$(app) && \
+	@project_path=$(target)/$(project)_$(app) && \
 		cp -r project.tmpl $${project_path} && \
 		\
 		sed -i'' -e 's/SCHEMATIC__PROJECT_NAME/$(project)/g' $${project_path}/docker/make.env/project.env && \
@@ -17,7 +17,7 @@ create.project.mssql: check_project_nulity check_app_nulity check_target_existen
 		mv $${project_path}/gitignore $${project_path}/.gitignore
 
 create.project.psql: check_project_nulity check_app_nulity check_target_existence
-	@project_path=$(target)/$(project)-$(app) && \
+	@project_path=$(target)/$(project)_$(app) && \
 		cp -r project.tmpl $${project_path} && \
 		\
 		sed -i'' -e 's/SCHEMATIC__PROJECT_NAME/$(project)/g' $${project_path}/docker/make.env/project.env && \
