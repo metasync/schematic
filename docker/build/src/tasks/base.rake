@@ -30,6 +30,7 @@ task :version do
   Rake::Task['schematic:version'].invoke
 end
 
+desc "Perform configuration checks"
 task :check do
   puts "Version check:"
   Rake::Task['version'].invoke
