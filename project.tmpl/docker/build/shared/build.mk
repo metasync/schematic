@@ -4,6 +4,7 @@ build:
 		--build-arg base_image_tag=${BASE_IMAGE_TAG} \
 		--build-arg app_home=${APP_HOME} \
 		--build-arg schematic_home=${SCHEMATIC_HOME} \
+		--build-arg env_home=${ENV_HOME} \
 		--build-arg project=${PROJECT_NAME} \
 		--build-arg app=${APP_NAME} \
 		--build-arg version=${APP_VERSION} \

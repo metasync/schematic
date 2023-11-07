@@ -5,6 +5,9 @@ FROM ${base_image_repo}:${base_image_tag}
 ARG schematic_home=/home/schematic
 ENV SCHEMATIC_HOME=${schematic_home}
 
+ARG env_home=/home/env
+ENV ENV_HOME=${env_home}
+
 ARG app_home=/home/app
 ENV APP_HOME=${app_home}
 ENV HISTFILE=${APP_HOME}/.bash_history
@@ -37,6 +40,8 @@ ARG base_image_repo
 ARG base_image_tag
 ARG created_at
 
+ENV PROJECT_NAME=#{projecct}
+ENV APP_NAME=#{app}
 ENV APP_VERSION=${version}-${release_tag}.${build_number}
 
 LABEL org.opencontainers.image.title=${project}-${app} \

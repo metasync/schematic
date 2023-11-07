@@ -2,14 +2,20 @@ ARG base_image_repo=docker.io/ruby
 ARG base_image_tag
 FROM ${base_image_repo}:${base_image_tag} AS base
 
-ARG app_home=/home/schematic
+ARG schematic_home=/home/schematic
+ENV SCHEMATIC_HOME=${schematic_home}
+
+ARG env_home=/home/env
+ENV ENV_HOME=${env_home}
+
+ARG app_home=/home/app
 ENV APP_HOME=${app_home}
 ENV HISTFILE=${APP_HOME}/.bash_history
 
-RUN apk -U upgrade \
-    && mkdir ${APP_HOME}
+RUN apk -U upgrade && \
+    mkdir ${APP_HOME}
 
-WORKDIR ${APP_HOME}
+WORKDIR ${SCHEMATIC_HOME}
 
 COPY . .
 
