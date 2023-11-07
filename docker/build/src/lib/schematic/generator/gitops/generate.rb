@@ -45,7 +45,7 @@ module Schematic
 
       def render_jobs_configmap
         job_configmap_template = File.join(configmap_templates_dir, 'job.yaml.erb')
-        if File.directory?(jobs_config_dir)
+        if Dir.exist?(jobs_config_dir)
           Dir["#{jobs_config_dir}/*.env"].each do |env_file|
             job_name = File.basename(env_file, '.env')
             job = job_name.gsub('_', '-')
