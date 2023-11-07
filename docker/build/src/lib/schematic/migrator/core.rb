@@ -17,7 +17,7 @@ module Schematic
     end
 
     def default_migration_dir
-      File.join("db", "migrations", options[:db_name])
+      File.join("db", "migrations")
     end
 
     def default_migration_table = nil
