@@ -24,8 +24,8 @@ module Schematic
 
       def render_cipher_configmap
         generate_by_template(
-          File.join(base_dir, 'cipher_configmap.yaml'),
-          File.join(base_templates_dir, 'cipher_configmap.yaml.erb')
+          File.join(base_dir, 'cipher-configmap.yaml'),
+          File.join(base_templates_dir, 'cipher-configmap.yaml.erb')
         )
       end
 
