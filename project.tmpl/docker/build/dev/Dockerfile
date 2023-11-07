@@ -13,7 +13,7 @@ ENV APP_HOME=${app_home}
 ENV HISTFILE=${APP_HOME}/.bash_history
 
 RUN apk -U upgrade && \
-    mkdir ${APP_HOME}
+    mkdir -p ${APP_HOME}
 
 WORKDIR ${APP_HOME}
 
