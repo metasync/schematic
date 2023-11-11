@@ -5,6 +5,7 @@ namespace :app do
   task :env do
     require "dotenv"
     Dotenv.load(*Dir["#{ENV['ENV_HOME']}/**/*.env"]) if Dir.exist?(ENV['ENV_HOME'])
+    puts "Environment settings are loaded successfully"
   end
   
   desc "Show application version"
