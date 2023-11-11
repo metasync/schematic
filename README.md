@@ -63,6 +63,9 @@ Schematic provides a few handy Rake tasks out-of-box:
 ```
 rake -T
 
+rake app:env                          # Load environment settings
+rake app:version                      # Show application version
+rake check                            # Perform configuration checks
 rake cipher:decrypt_env_var[env_var]  # Decrypt an environment variable
 rake cipher:encrypt[string]           # Encrypt a string
 rake cipher:encrypt_env_var[env_var]  # Encrypt an environment variable
@@ -78,7 +81,11 @@ rake db:migrations_to_apply           # Show schema migrations to apply
 rake db:redo[steps]                   # Redo last n migrations
 rake db:reset                         # Remove migrations and re-run migrations
 rake db:rollback[steps]               # Rollback last n migrations
+rake db:test                          # Test database connection
 rake deploy                           # Run deployment
+rake gitops:generate                  # Generate GitOps config
+rake schematic:version                # Show Schematic version
+rake version                          # Show version info
 ```
 
 ### Create a database migration
@@ -172,10 +179,9 @@ make push.app.rel
 Here is the project folder structure for a sample project:
 
 ```
-test_sample
+data-history_cms
 ├── CHANGELOG.md
 ├── README.md
-├── VERSION
 ├── docker
 │   ├── Makefile
 │   ├── Makefile.env
@@ -210,6 +216,7 @@ test_sample
 │       ├── base_image.env
 │       ├── cipher.env
 │       ├── database.env
+│       ├── dev_image.env
 │       ├── docker.env
 │       ├── mssql
 │       │   ├── database.env
@@ -217,8 +224,20 @@ test_sample
 │       └── project.env
 └── src
     ├── Rakefile
+    ├── VERSION
     ├── db
     │   └── migrations
+    │       └── 20231107173640_samples.rb
+    ├── gitops
+    │   ├── base
+    │   │   └── cipher_configmap.yaml
+    │   └── overlays
+    │       └── dev
+    │           └── configmap
+    │               ├── credentials.yaml
+    │               ├── database.yaml
+    │               └── jobs
+    │                   └── general.yaml
     ├── jobs
     │   └── general.yaml
     └── stored_procedures
